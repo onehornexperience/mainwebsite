@@ -27,13 +27,24 @@ function App() {
   const { hideLoading } = useLoading();
 
   useEffect(() => {
+    // Hide loading when window loads
     window.addEventListener('load', hideLoading);
+    
+    // Handle global errors
     window.addEventListener('error', (event) => {
       console.error('Global error:', event.error);
+      hideLoading(); // Ensure loading is hidden even when errors occur
     });
+
+    // Handle navigation completion
+    const handleNavigation = () => {
+      hideLoading();
+    };
+    window.addEventListener('DOMContentLoaded', handleNavigation);
 
     return () => {
       window.removeEventListener('load', hideLoading);
+      window.removeEventListener('DOMContentLoaded', handleNavigation);
       window.removeEventListener('error', () => {});
     };
   }, [hideLoading]);

@@ -2,6 +2,7 @@ import React from 'react';
 import { useTheme } from '../context/ThemeContext';
 import ContactComponent from '../components/Contact';
 import PageCarousel from '../components/PageCarousel';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const contactImages = [
   {
@@ -22,14 +23,36 @@ const Contact = () => {
   const { isDarkMode } = useTheme();
 
   return (
-    <main>
-      <PageCarousel
-        images={contactImages}
-        title="Contact Us"
-        description="Get in touch with our team to start planning your next extraordinary event."
-      />
-      <ContactComponent />
-    </main>
+    <AnimatePresence mode="wait">
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
+      >
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="relative z-10"
+        >
+          <PageCarousel
+            images={contactImages}
+            title="Contact Us"
+            description="Get in touch with our team to start planning your next extraordinary event."
+          />
+        </motion.div>
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          className="relative z-10"
+        >
+          <ContactComponent />
+        </motion.div>
+      </motion.main>
+    </AnimatePresence>
   );
 };
 
