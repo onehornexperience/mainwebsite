@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import { Check, Star, ArrowRight } from 'lucide-react';
+import { Check, Star, ArrowRight, X } from 'lucide-react';
 import PageCarousel from '../components/PageCarousel';
 
 const serviceDetails = {
@@ -61,6 +61,11 @@ const serviceDetails = {
       {
         name: 'Emily & James',
         comment: 'Professional, creative, and absolutely amazing to work with. Highly recommended!',
+        rating: 5
+      },
+      {
+        name: 'Jessica & David',
+        comment: 'We could not have asked for a better team to plan our special day. From start to finish, everything was handled with care and professionalism.',
         rating: 5
       }
     ]
@@ -122,6 +127,11 @@ const serviceDetails = {
         name: 'Lisa Johnson',
         comment: 'Professional team that delivered beyond our expectations.',
         rating: 5
+      },
+      {
+        name: 'Michael Chang',
+        comment: 'The corporate event they organized for us was flawless. Their team handled everything professionally from setup to teardown.',
+        rating: 5
       }
     ]
   },
@@ -181,6 +191,11 @@ const serviceDetails = {
       {
         name: 'David Wilson',
         comment: 'Amazing team that created a fantastic celebration. Highly recommended!',
+        rating: 5
+      },
+      {
+        name: 'Amanda Rodriguez',
+        comment: 'My 40th birthday party was everything I dreamed of and more. The decorations, food, and entertainment were all top-notch.',
         rating: 5
       }
     ]
@@ -242,6 +257,11 @@ const serviceDetails = {
         name: 'Music Promoter',
         comment: 'Outstanding production quality and professional management.',
         rating: 5
+      },
+      {
+        name: 'Band Manager',
+        comment: 'The stage setup and sound quality were exceptional. Our artists were extremely pleased with the overall experience.',
+        rating: 5
       }
     ]
   },
@@ -302,6 +322,11 @@ const serviceDetails = {
         name: 'Marketing Director',
         comment: 'Exceptional attention to detail and brand alignment. Outstanding results!',
         rating: 5
+      },
+      {
+        name: 'Product Manager',
+        comment: 'The launch event exceeded all our expectations. The media coverage and customer engagement were phenomenal.',
+        rating: 5
       }
     ]
   },
@@ -345,12 +370,14 @@ const serviceDetails = {
       }
     ],
     gallery: [
-      'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1471295253337-3ceaaad65897?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1463244019899-6ff29c86c56a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1471295253337-3ceaaad65897?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', // Marathon event
+      'https://images.unsplash.com/photo-1471295253337-3ceaaad65897?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', // Stadium setup
+      'https://images.unsplash.com/photo-1463244019899-6ff29c86c56a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', // Sports crowd
+      'https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', // Basketball event
+      'https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', // Soccer match
+      'https://images.unsplash.com/photo-1519766304817-4f37bda74b38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', // Tennis tournament
+      'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', // Track event
+      'https://images.unsplash.com/photo-1523621435-12539348628a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'  // Award ceremony
     ],
     testimonials: [
       {
@@ -361,6 +388,11 @@ const serviceDetails = {
       {
         name: 'Event Coordinator',
         comment: 'Outstanding organization and attention to safety protocols.',
+        rating: 5
+      },
+      {
+        name: 'Team Coach',
+        comment: 'The tournament was perfectly organized with great attention to the needs of the athletes. Will definitely work with them again.',
         rating: 5
       }
     ]
@@ -422,6 +454,11 @@ const serviceDetails = {
         name: 'Social Club',
         comment: 'Professional team that delivered a perfect social event.',
         rating: 5
+      },
+      {
+        name: 'Community Organizer',
+        comment: 'Our annual community gathering was a huge hit thanks to the creative ideas and excellent execution from the team.',
+        rating: 5
       }
     ]
   },
@@ -482,6 +519,11 @@ const serviceDetails = {
         name: 'Event Host',
         comment: 'Incredible attention to detail and innovative solutions.',
         rating: 5
+      },
+      {
+        name: 'Corporate Client',
+        comment: 'Our themed company retreat was a massive success. The custom experiences they created were both unique and memorable.',
+        rating: 5
       }
     ]
   }
@@ -490,6 +532,7 @@ const serviceDetails = {
 const ServiceDetails = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
   const { isDarkMode } = useTheme();
+  const [viewImage, setViewImage] = React.useState<string | null>(null);
   
   const service = serviceDetails[serviceId as keyof typeof serviceDetails];
   
@@ -509,7 +552,7 @@ const ServiceDetails = () => {
         description={service.description}
       />
       
-      <div className={`py-20 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+      <div className={`py-20 ${isDarkMode ? 'bg-black' : 'bg-rose-50/30'}`}>
         <div className="container mx-auto px-4 md:px-6">
           {/* Why Choose Us */}
           <div className="mb-20">
@@ -520,7 +563,7 @@ const ServiceDetails = () => {
               {service.features.map((feature, index) => (
                 <div 
                   key={index}
-                  className={`${isDarkMode ? 'bg-dark-bg' : 'bg-gray-50'} p-8 rounded-lg shadow-lg`}
+                  className={`${isDarkMode ? 'bg-dark-bg' : 'bg-white'} p-8 rounded-lg shadow-lg`}
                 >
                   <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>
                     {feature.title}
@@ -566,53 +609,217 @@ const ServiceDetails = () => {
             <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-12 text-center`}>
               Previous Events Gallery
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {service.gallery.map((image, index) => (
-                <div 
-                  key={index}
-                  className="relative overflow-hidden rounded-lg shadow-lg aspect-[4/3]"
-                >
-                  <img
-                    src={image}
-                    alt={`Gallery image ${index + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
+            <div className="relative px-12">
+              <div className="grid grid-cols-12 gap-3">
+                {/* First column */}
+                <div className="col-span-12 sm:col-span-3 md:col-span-3">
+                  <div className="grid gap-3">
+                    <div className="relative overflow-hidden rounded-xl h-48 md:h-56 group cursor-pointer" onClick={() => setViewImage(service.gallery[0])}>
+                      <img
+                        src={service.gallery[0]}
+                        alt="Event photo"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <button className="px-6 py-2 rounded-full bg-black/70 text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                          View
+                        </button>
+                      </div>
+                    </div>
+                    <div className="relative overflow-hidden rounded-xl h-48 md:h-56 group cursor-pointer" onClick={() => setViewImage(service.gallery[3] || service.gallery[0])}>
+                      <img
+                        src={service.gallery[3] || service.gallery[0]}
+                        alt="Event photo"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <button className="px-6 py-2 rounded-full bg-black/70 text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                          View
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              ))}
+                
+                {/* Second column - large central image */}
+                <div className="col-span-12 sm:col-span-6 md:col-span-6">
+                  <div className="relative overflow-hidden rounded-xl h-full min-h-[24rem] group cursor-pointer" onClick={() => setViewImage(service.gallery[1])}>
+                    <img
+                      src={service.gallery[1]}
+                      alt="Event photo"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <button className="px-6 py-2 rounded-full bg-black/70 text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Third column */}
+                <div className="col-span-12 sm:col-span-3 md:col-span-3">
+                  <div className="grid gap-3">
+                    <div className="relative overflow-hidden rounded-xl h-48 md:h-56 group cursor-pointer" onClick={() => setViewImage(service.gallery[2])}>
+                      <img
+                        src={service.gallery[2]}
+                        alt="Event photo"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <button className="px-6 py-2 rounded-full bg-black/70 text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                          View
+                        </button>
+                      </div>
+                    </div>
+                    <div className="relative overflow-hidden rounded-xl h-48 md:h-56 group cursor-pointer" onClick={() => setViewImage(service.gallery[4] || service.gallery[1])}>
+                      <img
+                        src={service.gallery[4] || service.gallery[1]}
+                        alt="Event photo"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <button className="px-6 py-2 rounded-full bg-black/70 text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                          View
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Bottom row for remaining images */}
+              <div className="grid grid-cols-12 gap-3 mt-3">
+                <div className="col-span-12 sm:col-span-4 md:col-span-4">
+                  <div className="relative overflow-hidden rounded-xl h-48 md:h-56 group cursor-pointer" onClick={() => setViewImage(service.gallery[5] || service.gallery[2])}>
+                    <img
+                      src={service.gallery[5] || service.gallery[2]}
+                      alt="Event photo"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <button className="px-6 py-2 rounded-full bg-black/70 text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="col-span-12 sm:col-span-4 md:col-span-4">
+                  <div className="relative overflow-hidden rounded-xl h-48 md:h-56 group cursor-pointer" onClick={() => setViewImage(service.gallery[6] || service.gallery[0])}>
+                    <img
+                      src={service.gallery[6] || service.gallery[0]}
+                      alt="Event photo"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <button className="px-6 py-2 rounded-full bg-black/70 text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="col-span-12 sm:col-span-4 md:col-span-4">
+                  <div className="relative overflow-hidden rounded-xl h-48 md:h-56 group cursor-pointer" onClick={() => setViewImage(service.gallery[7] || service.gallery[1])}>
+                    <img
+                      src={service.gallery[7] || service.gallery[1]}
+                      alt="Event photo"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <button className="px-6 py-2 rounded-full bg-black/70 text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Navigation arrows */}
+              <div className="absolute top-1/2 -translate-y-1/2 left-0">
+                <button className="rounded-full w-10 h-10 bg-white flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700 w-5 h-5">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+              
+              <div className="absolute top-1/2 -translate-y-1/2 right-0">
+                <button className="rounded-full w-10 h-10 bg-white flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700 w-5 h-5">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Testimonials */}
           <div>
-            <h2 className={`text-3xl font-bol d ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-12 text-center`}>
-              Client Testimonials
+            <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-12 text-center`}>
+              Client's Words
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {service.testimonials.map((testimonial, index) => (
                 <div 
                   key={index}
-                  className={`${isDarkMode ? 'bg-dark-bg' : 'bg-gray-50'} p-8 rounded-lg shadow-lg`}
+                  className={`${isDarkMode ? 'bg-dark-bg' : 'bg-white'} rounded-xl p-4 shadow-sm h-full`}
                 >
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="h-5 w-5 text-yellow-400 fill-yellow-400"
-                      />
-                    ))}
+                  <div className="h-full flex flex-col">
+                    <div className="flex-grow">
+                      <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>
+                        Thank you for the wonderful service!
+                      </h3>
+                      <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-sm`}>
+                        "{testimonial.comment}"
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-center mt-3">
+                      <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                        <span className="text-indigo-600 font-bold">{testimonial.name.charAt(0)}</span>
+                      </div>
+                      <div>
+                        <h4 className={`font-medium text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                          {testimonial.name}
+                        </h4>
+                        <div className="flex mt-0.5">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star 
+                              key={i} 
+                              className="h-3 w-3 text-yellow-400 fill-yellow-400"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} italic mb-4`}>
-                    "{testimonial.comment}"
-                  </p>
-                  <p className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                    {testimonial.name}
-                  </p>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Image Modal */}
+      {viewImage && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4">
+          <div className="max-w-4xl w-full max-h-[90vh] relative">
+            <img 
+              src={viewImage} 
+              alt="Gallery view" 
+              className="w-full h-full object-contain rounded-xl"
+            />
+            <button 
+              onClick={() => setViewImage(null)}
+              className="absolute top-4 right-4 bg-black/50 text-white rounded-full p-2 hover:bg-black/80 transition-colors"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 };

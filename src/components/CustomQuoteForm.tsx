@@ -165,7 +165,7 @@ const CustomQuoteForm = () => {
   };
 
   return (
-    <section className={`py-20 ${isDarkMode ? 'bg-dark-bg' : 'bg-white'}`}>
+    <section className={`py-20 ${isDarkMode ? 'bg-dark-bg' : 'bg-rose-50/30'}`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className={`max-w-4xl mx-auto ${isDarkMode ? 'bg-dark-bg-alt' : 'bg-white'} rounded-lg shadow-lg p-8`}>
           <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>

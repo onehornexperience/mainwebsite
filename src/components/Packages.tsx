@@ -113,7 +113,7 @@ const Packages = () => {
   };
 
   return (
-    <section id="packages" className={`py-20 ${isDarkMode ? 'bg-dark-bg' : 'bg-white'}`}>
+    <section id="packages" className={`py-20 ${isDarkMode ? 'bg-dark-bg' : 'bg-rose-50/30'}`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
         </div>

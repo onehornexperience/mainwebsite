@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import ThemeToggle from './ThemeToggle';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const { isDarkMode } = useTheme();
@@ -21,9 +22,9 @@ const Footer = () => {
           <div>
             <div className="flex items-center mb-4">
               <img 
-                src="/OHE Logo2svg .svg"
+                src="/ohe-white2.0.png"
                 alt="One Horn Experience Logo"
-                className="h-20 w-20 rounded-full object-cover mr-3"
+                className="h-24 w-auto object-contain"
               />
             </div>
             <p className="text-gray-400 mb-6">
@@ -57,22 +58,22 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link>
               </li>
               <li>
-                <a href="/services" className="text-gray-400 hover:text-white transition-colors">Services</a>
+                <Link to="/services" className="text-gray-400 hover:text-white transition-colors">Services</Link>
               </li>
               <li>
-                <a href="/packages" className="text-gray-400 hover:text-white transition-colors">Packages</a>
+                <Link to="/packages" className="text-gray-400 hover:text-white transition-colors">Packages</Link>
               </li>
               <li>
-                <a href="/portfolio" className="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+                <Link to="/portfolio" className="text-gray-400 hover:text-white transition-colors">Portfolio</Link>
               </li>
               <li>
-                <a href="/testimonials" className="text-gray-400 hover:text-white transition-colors">Testimonials</a>
+                <Link to="/testimonials" className="text-gray-400 hover:text-white transition-colors">Testimonials</Link>
               </li>
               <li>
-                <a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a>
+                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link>
               </li>
             </ul>
           </div>
@@ -124,7 +125,7 @@ const Footer = () => {
               </div>
             </form>
             <p className="text-gray-500 text-sm">
-              By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.
+              By subscribing, you agree to our <Link to="/privacy-policy" className="text-indigo-400 hover:text-indigo-300">Privacy Policy</Link> and consent to receive updates from our company.
             </p>
           </div>
         </div>
@@ -136,9 +137,9 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} The One Horn Experience. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-500 hover:text-gray-400 text-sm">Privacy Policy</a>
-            <a href="#" className="text-gray-500 hover:text-gray-400 text-sm">Terms of Service</a>
-            <a href="#" className="text-gray-500 hover:text-gray-400 text-sm">Cookie Policy</a>
+            <Link to="/privacy-policy" className="text-gray-500 hover:text-gray-400 text-sm">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="text-gray-500 hover:text-gray-400 text-sm">Terms of Service</Link>
+            <Link to="/cookie-policy" className="text-gray-500 hover:text-gray-400 text-sm">Cookie Policy</Link>
           </div>
         </div>
       </div>

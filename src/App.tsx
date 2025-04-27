@@ -21,6 +21,9 @@ import UserProfile from './pages/UserProfile';
 import ChatWidget from './components/ChatWidget';
 import CallUsButton from './components/CallUsButton';
 import PrivateRoute from './components/PrivateRoute';
+import Gallery from './pages/Gallery';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   const { isDarkMode } = useTheme();
@@ -50,7 +53,7 @@ function App() {
   }, [hideLoading]);
   
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'dark bg-dark-bg text-dark-text' : 'bg-light-bg text-light-text'} transition-colors duration-200`}>
+    <div className={`min-h-screen ${isDarkMode ? 'dark bg-dark-bg text-dark-text' : 'bg-rose-50/30 text-light-text'} transition-colors duration-200`}>
       <ScrollToTop />
       <Navbar />
       <CallUsButton />
@@ -60,6 +63,7 @@ function App() {
         <Route path="/services/:serviceId" element={<ServiceDetails />} />
         <Route path="/packages" element={<Packages />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/custom-quote" element={<CustomQuote />} />
@@ -84,6 +88,8 @@ function App() {
             <Dashboard />
           </PrivateRoute>
         } />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
       </Routes>
       <Footer />
       <ChatWidget />

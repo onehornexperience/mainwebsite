@@ -43,9 +43,9 @@ const CallUsButton = () => {
 
       {/* Click to call link */}
       <a
-        href="tel:+15551234567"
+        href="tel:+916002788139"
         className={`absolute left-0 top-0 w-full h-full opacity-0`}
-        aria-label="Call +1 (555) 123-4567"
+        aria-label="Call +91 6002788139"
       />
     </div>
   );
