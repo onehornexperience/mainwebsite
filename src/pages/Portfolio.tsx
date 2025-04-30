@@ -29,7 +29,7 @@ const Portfolio = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
+        className="min-h-screen bg-gradient-to-b from-rose-50/30 to-white dark:from-gray-900 dark:to-gray-800"
       >
         <motion.div
           initial={{ y: 30, opacity: 0 }}

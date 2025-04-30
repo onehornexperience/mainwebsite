@@ -1,136 +1,141 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import React from 'react';
+import { Star } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-const testimonials = [
+type TestimonialSize = 'small' | 'medium' | 'large';
+
+interface Testimonial {
+  id: number;
+  name: string;
+  quote: string;
+  description: string;
+  image: string;
+  rating: number;
+  size: TestimonialSize;
+}
+
+const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'Jennifer & Robert',
-    role: 'Wedding Clients',
+    name: 'Nicolas Freeman',
+    quote: 'Thank you for managing everything on our behalf!',
+    description: 'The Best Wedding Planner in the World is You. We Appreciate the Wonderful Surprises and the Decorations.',
     image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
-    quote: 'EventMaster transformed our wedding day into something truly magical. Their attention to detail and creative vision exceeded our expectations. Every moment was perfect!',
     rating: 5,
-    eventType: 'Wedding'
+    size: 'medium'
   },
   {
     id: 2,
-    name: 'Mark Thompson',
-    role: 'Marketing Director, TechCorp',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
-    quote: 'Our annual conference was flawlessly executed thanks to the EventMaster team. From the initial planning stages to the day-of coordination, they were professional and detail-oriented.',
+    name: 'Louisa Nelson',
+    quote: 'Thank You Again for Making This Perfectionist Bride So Happy!',
+    description: 'We Got So Much Praise From Everyone and We Enjoyed All the Details They Planned. The decorations were spectacular and the timing was perfect.',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
     rating: 5,
-    eventType: 'Corporate Conference'
+    size: 'large'
   },
   {
     id: 3,
-    name: 'Sophia Rodriguez',
-    role: 'Birthday Celebration',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
-    quote: 'I wanted my 30th birthday to be special, and EventMaster delivered beyond my wildest dreams. The custom theme they created was absolutely stunning!',
+    name: 'Joan Adams',
+    quote: 'It Was Perfect! Thank You Again!',
+    description: 'We Want to Say Thanks for Being Such a Coordinator!',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
     rating: 5,
-    eventType: 'Birthday Party'
+    size: 'small'
   },
   {
     id: 4,
-    name: 'David Chen',
-    role: 'CEO, Innovate Products',
+    name: 'Carmen Carpenter',
+    quote: 'You Kept Us on Track in the Lead Up to the Wedding.',
+    description: 'They Continued to Offer Support. They Offered Ideas Which Were Inspiring.',
     image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
-    quote: 'Our product launch event was critical for our business, and EventMaster understood exactly what we needed. The media coverage and attendee feedback were exceptional.',
     rating: 5,
-    eventType: 'Product Launch'
+    size: 'medium'
+  },
+  {
+    id: 5,
+    name: 'Carmen Carpenter',
+    quote: 'You Were and Are Fantastic!',
+    description: 'We Couldn\'t Have Done It Without You. Thanks!',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
+    rating: 5,
+    size: 'small'
+  },
+  {
+    id: 6,
+    name: 'Carolyn Ford',
+    quote: 'With These Wonderful People, You Can Picture a Stress-free Wedding Day!',
+    description: 'It Looked Like Something Out of a Magazine, It Was Perfect! We Received So Many Compliments From Everyone.',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
+    rating: 5,
+    size: 'large'
   }
 ];
 
 const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const { isDarkMode } = useTheme();
   
-  const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  };
-  
-  const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+  // Helper function to determine card height class based on size
+  const getCardHeightClass = (size: TestimonialSize): string => {
+    switch (size) {
+      case 'small': return 'h-full flex flex-col';
+      case 'medium': return 'h-full flex flex-col';
+      case 'large': return 'h-full flex flex-col';
+      default: return 'h-full flex flex-col';
+    }
   };
 
   return (
-    <section id="testimonials" className={`py-20 ${isDarkMode ? 'bg-dark-bg' : 'bg-white'}`}>
+    <section id="testimonials" className={`py-16 ${isDarkMode ? 'bg-dark-bg' : 'bg-rose-50/30'}`}>
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16">
-          <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>Client Testimonials</h2>
-          <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto`}>
-            Don't just take our word for it. Here's what our clients have to say about their experience working with us.
-          </p>
+        <div className="text-center mb-10">
+          <h2 className={`text-4xl md:text-5xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            Client's Words
+          </h2>
         </div>
         
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Testimonial cards */}
-            <div className="overflow-hidden">
-              <div 
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              >
-                {testimonials.map((testimonial) => (
-                  <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                    <div className={`${isDarkMode ? 'bg-dark-bg-alt' : 'bg-gray-50'} rounded-lg p-8 shadow-lg`}>
-                      <div className="flex items-center mb-6">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.name} 
-                          className="w-16 h-16 rounded-full object-cover mr-4"
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+          {testimonials.map((testimonial) => (
+            <div 
+              key={testimonial.id} 
+              className={`${isDarkMode ? 'bg-dark-bg-alt' : 'bg-white'} rounded-xl p-4 shadow-sm h-full`}
+            >
+              <div className={getCardHeightClass(testimonial.size)}>
+                <div className="flex-grow">
+                  <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>
+                    {testimonial.quote}
+                  </h3>
+                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} text-sm ${
+                    testimonial.size === 'small' ? 'line-clamp-1' : 
+                    testimonial.size === 'medium' ? 'line-clamp-2' : 
+                    'line-clamp-3'
+                  }`}>
+                    {testimonial.description}
+                  </p>
+                </div>
+                
+                <div className="flex items-center mt-3">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name} 
+                    className="w-8 h-8 rounded-full object-cover mr-2"
+                  />
+                  <div>
+                    <h4 className={`font-medium text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                      {testimonial.name}
+                    </h4>
+                    <div className="flex mt-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          className="h-3 w-3 text-yellow-400 fill-yellow-400"
                         />
-                        <div>
-                          <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{testimonial.name}</h3>
-                          <p className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>{testimonial.role}</p>
-                          <div className="flex mt-1">
-                            {[...Array(5)].map((_, i) => (
-                              <Star 
-                                key={i} 
-                                className={`h-4 w-4 ${i < testimonial.rating ? 'text-yellow-400 fill-yellow-400' : isDarkMode ? 'text-gray-600' : 'text-gray-300'}`} 
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} italic mb-4`}>"{testimonial.quote}"</p>
-                      <p className="text-indigo-600 dark:text-indigo-400 font-medium">Event: {testimonial.eventType}</p>
+                      ))}
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
-            
-            {/* Navigation buttons */}
-            <button 
-              onClick={prevTestimonial}
-              className={`absolute top-1/2 left-0 -translate-y-1/2 -translate-x-4 ${isDarkMode ? 'bg-dark-bg-alt' : 'bg-white'} rounded-full p-2 shadow-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors`}
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className={`h-6 w-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`} />
-            </button>
-            <button 
-              onClick={nextTestimonial}
-              className={`absolute top-1/2 right-0 -translate-y-1/2 translate-x-4 ${isDarkMode ? 'bg-dark-bg-alt' : 'bg-white'} rounded-full p-2 shadow-md ${isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition-colors`}
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className={`h-6 w-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`} />
-            </button>
-          </div>
-          
-          {/* Indicators */}
-          <div className="flex justify-center mt-8 space-x-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-2 w-8 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-indigo-600' : isDarkMode ? 'bg-gray-700' : 'bg-gray-300'
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
+          ))}
         </div>
       </div>
     </section>
